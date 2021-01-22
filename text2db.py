@@ -24,11 +24,13 @@ def txtTodf(folder_name):
         name = re.findall(pattern_common,file_list[i])
         try:
             print(file_list[i])
-            with open(file_list[i]) as f_input:
+            with open(file_list[i],encoding='utf-8') as f_input:
                 c[name[0]] = f_input.read()
         except UnicodeDecodeError:
             print(f'Did not work for {file_list[i]}')
             notappend.append(name[0])
+            
+txtTodf("D:\FYP\Text\googleAPI\Accounting, Auditing, Finance")
             
 for name in glob.glob(r'D:\FYP\Text\googleAPI\*'): 
     print(name+'+++++++++++++++++++++++++++++++')
@@ -38,5 +40,5 @@ df = pd.DataFrame(list(c.items()),columns = ['name','text'])
 # Replacing \n 
 df.text = df.text.apply(lambda x: x.replace("\n"," "))
 
-df.to_csv("D:\FYP\Text_db_final_2.csv")
+df.to_csv("D:\FYP\Text_db_final_test.csv",encoding = "utf-8")
 #txtTodf(r"D:\FYP\Text\googleAPI\Eng-Mech-Auto-Elec")
